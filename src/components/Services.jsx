@@ -1,51 +1,4 @@
-import { useEffect } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
 const Services = () => {
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
-    
-    // Animate service cards on scroll
-    gsap.from('.service-card', {
-      scrollTrigger: {
-        trigger: '.service-card',
-        start: 'top 80%',
-        end: 'bottom 20%',
-        toggleActions: 'play none none reverse'
-      },
-      y: 100,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.2,
-      ease: 'power3.out'
-    })
-    
-    // Hover animations for service cards
-    gsap.utils.toArray('.service-card').forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        gsap.to(card, {
-          y: -10,
-          scale: 1.05,
-          duration: 0.3,
-          ease: 'power2.out'
-        })
-      })
-      
-      card.addEventListener('mouseleave', () => {
-        gsap.to(card, {
-          y: 0,
-          scale: 1,
-          duration: 0.3,
-          ease: 'power2.out'
-        })
-      })
-    })
-    
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
-    }
-  }, [])
   const services = [
     {
       icon: (
@@ -53,19 +6,9 @@ const Services = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
         </svg>
       ),
-      title: "Frontend Development",
-      description: "Modern, responsive web applications using React, Vue.js, and Angular with cutting-edge design patterns.",
-      features: ["React & Next.js", "Vue.js & Nuxt.js", "Angular", "TypeScript", "Tailwind CSS", "Responsive Design"]
-    },
-    {
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
-        </svg>
-      ),
-      title: "Backend Development",
-      description: "Scalable server-side solutions with robust APIs, databases, and cloud infrastructure.",
-      features: ["Node.js & Express", "Python & Django", "PHP & Laravel", "Database Design", "API Development", "Cloud Deployment"]
+      title: "Web Development",
+      description: "Custom web applications built with modern technologies and best practices.",
+      features: ["React/Next.js", "Node.js/Express", "Database Design", "API Development", "Performance Optimization", "SEO Optimization"]
     },
     {
       icon: (
@@ -74,18 +17,18 @@ const Services = () => {
         </svg>
       ),
       title: "Mobile Development",
-      description: "Cross-platform mobile applications for iOS and Android using React Native and Flutter.",
-      features: ["React Native", "Flutter", "iOS Development", "Android Development", "App Store Deployment", "Cross-platform Solutions"]
+      description: "Native and cross-platform mobile apps for iOS and Android.",
+      features: ["React Native", "Flutter", "iOS Development", "Android Development", "App Store Optimization", "Push Notifications"]
     },
     {
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       ),
-      title: "DevOps & Cloud",
-      description: "Complete deployment and infrastructure management with modern DevOps practices.",
-      features: ["AWS & Azure", "Docker & Kubernetes", "CI/CD Pipelines", "Monitoring & Logging", "Security", "Auto-scaling"]
+      title: "E-commerce Solutions",
+      description: "Complete e-commerce platforms with payment integration and inventory management.",
+      features: ["Shopify/WooCommerce", "Payment Gateways", "Inventory Management", "Order Processing", "Analytics", "Security"]
     },
     {
       icon: (
@@ -94,13 +37,23 @@ const Services = () => {
         </svg>
       ),
       title: "Performance Optimization",
-      description: "Speed up your applications with advanced optimization techniques and best practices.",
-      features: ["Code Optimization", "Database Tuning", "CDN Implementation", "Caching Strategies", "Load Testing", "Performance Monitoring"]
+      description: "Speed up your applications with advanced optimization techniques.",
+      features: ["Code Optimization", "Database Tuning", "CDN Setup", "Caching Strategies", "Image Optimization", "Bundle Optimization"]
     },
     {
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+        </svg>
+      ),
+      title: "Cloud Solutions",
+      description: "Scalable cloud infrastructure and deployment solutions.",
+      features: ["AWS/Azure", "Docker/Kubernetes", "CI/CD Pipelines", "Serverless Functions", "Database Management", "Monitoring"]
+    },
+    {
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z" />
         </svg>
       ),
       title: "UI/UX Design",
@@ -131,7 +84,8 @@ const Services = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="service-card group relative bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 p-8 border border-white/20 overflow-hidden"
+              className="service-card group relative bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 p-8 border border-white/20 overflow-hidden animate-fade-in-up"
+              style={{animationDelay: `${index * 0.1}s`}}
             >
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -179,7 +133,7 @@ const Services = () => {
             </p>
             <button 
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105"
+              className="bg-white text-blue-600 font-semibold px-8 py-3 rounded-full hover:bg-gray-100 transition-colors duration-300"
             >
               Get Free Consultation
             </button>
