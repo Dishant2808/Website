@@ -31,10 +31,10 @@ const LoadingAnimation = () => {
   if (!isLoading) return null
 
   return (
-    <div className="loading-overlay fixed inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-800 z-50 flex items-center justify-center">
+    <div className="loading-overlay fixed inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-800 z-50 flex items-center justify-center pointer-events-none">
       <div className="text-center text-white">
         <div className="loading-spinner w-16 h-16 border-4 border-white/30 border-t-white rounded-full mb-4 mx-auto"></div>
-        <h2 className="text-2xl font-bold mb-2">DevFirm</h2>
+        <h2 className="text-2xl font-bold mb-2">Krishna WebWorks</h2>
         <p className="text-lg opacity-90">Loading amazing experiences...</p>
       </div>
     </div>

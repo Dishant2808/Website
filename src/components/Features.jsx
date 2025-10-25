@@ -65,7 +65,7 @@ const Features = () => {
             <span className="text-indigo-600 font-semibold">Why Choose Us</span>
           </div>
           <h2 className="text-5xl font-bold bg-gradient-to-r from-indigo-900 via-purple-900 to-pink-900 bg-clip-text text-transparent mb-6">
-            Why Choose DevFirm?
+            Why Choose Krishna WebWorks?
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             We combine cutting-edge technology with creative design to deliver 

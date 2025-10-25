@@ -6,20 +6,15 @@ const Footer = () => {
       { name: 'Web Development', href: '#services' },
       { name: 'Mobile Development', href: '#services' },
       { name: 'Backend Development', href: '#services' },
-      { name: 'UI/UX Design', href: '#services' },
-      { name: 'DevOps', href: '#services' }
     ],
     company: [
       { name: 'About Us', href: '#team' },
       { name: 'Our Team', href: '#team' },
       { name: 'Portfolio', href: '#portfolio' },
-      { name: 'Careers', href: '#contact' },
       { name: 'Contact', href: '#contact' }
     ],
     resources: [
-      { name: 'Blog', href: '#' },
       { name: 'Case Studies', href: '#portfolio' },
-      { name: 'Documentation', href: '#' },
       { name: 'Support', href: '#contact' },
       { name: 'FAQ', href: '#' }
     ]
@@ -71,7 +66,7 @@ const Footer = () => {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold text-white mb-4">DevFirm</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">Krishna WebWorks</h3>
               <p className="text-gray-400 leading-relaxed mb-6">
                 We're a team of passionate developers creating exceptional digital 
                 experiences that drive business growth and user satisfaction.
@@ -145,43 +140,18 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Newsletter Signup */}
-        <div className="mt-12 pt-8 border-t border-gray-800">
-          <div className="max-w-md mx-auto text-center">
-            <h4 className="text-lg font-semibold text-white mb-4">
-              Stay Updated
-            </h4>
-            <p className="text-gray-400 mb-6">
-              Get the latest updates on our projects and industry insights.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400"
-              />
-              <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300">
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div>
-
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-gray-800">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-gray-400 text-sm mb-4 md:mb-0">
-              © {currentYear} DevFirm. All rights reserved.
+              © {currentYear} Krishna WebWorks. All rights reserved.
             </div>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
+              <a href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors duration-300">
                 Privacy Policy
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
+              <a href="/terms-of-service" className="text-gray-400 hover:text-white transition-colors duration-300">
                 Terms of Service
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
-                Cookie Policy
               </a>
             </div>
           </div>

@@ -1,22 +1,48 @@
 import { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const Navigation = ({ activeSection, setActiveSection }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const location = useLocation()
+  const navigate = useNavigate()
 
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'services', label: 'Services' },
     { id: 'portfolio', label: 'Portfolio' },
-    { id: 'team', label: 'Team' },
     { id: 'contact', label: 'Contact' }
   ]
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+  const handleNavigation = (sectionId) => {
+    if (location.pathname !== '/') {
+      // If not on home page, navigate to home page first
+      navigate('/')
+      // Wait for navigation to complete, then scroll to section
+      setTimeout(() => {
+        if (sectionId === 'home') {
+          // Scroll to top for home section
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        } else {
+          const element = document.getElementById(sectionId)
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' })
+          }
+        }
+        setActiveSection(sectionId)
+      }, 100)
+    } else {
+      // If on home page, just scroll to section
+      if (sectionId === 'home') {
+        // Scroll to top for home section
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else {
+        const element = document.getElementById(sectionId)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+      }
+      setActiveSection(sectionId)
     }
-    setActiveSection(sectionId)
     setIsMenuOpen(false)
   }
 
@@ -26,7 +52,12 @@ const Navigation = ({ activeSection, setActiveSection }) => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <h1 className="text-2xl font-bold text-blue-600">DevFirm</h1>
+            <button 
+              onClick={() => navigate('/')}
+              className="text-2xl font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
+            >
+              Krishna WebWorks
+            </button>
           </div>
 
           {/* Desktop Navigation */}
@@ -35,7 +66,7 @@ const Navigation = ({ activeSection, setActiveSection }) => {
               {navItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  onClick={() => handleNavigation(item.id)}
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
                     activeSection === item.id
                       ? 'bg-blue-100 text-blue-700'
@@ -83,7 +114,7 @@ const Navigation = ({ activeSection, setActiveSection }) => {
               {navItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  onClick={() => handleNavigation(item.id)}
                   className={`block px-3 py-2 rounded-md text-base font-medium w-full text-left transition-colors duration-200 ${
                     activeSection === item.id
                       ? 'bg-blue-100 text-blue-700'

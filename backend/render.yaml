@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: krishna-webworks-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MAIL_HOST
+        value: smtp.gmail.com
+      - key: MAIL_PORT
+        value: 587
+      - key: MAIL_USERNAME
+        value: your-email@gmail.com
+      - key: MAIL_PASSWORD
+        value: your-app-password
+      - key: MAIL_FROM_NAME
+        value: Krishna WebWorks
+

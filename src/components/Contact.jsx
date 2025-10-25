@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Notification from './Notification'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -7,6 +8,13 @@ const Contact = () => {
     company: '',
     message: ''
   })
+  
+  const [notification, setNotification] = useState({
+    show: false,
+    message: '',
+    type: 'success'
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleChange = (e) => {
     setFormData({
@@ -15,15 +23,69 @@ const Contact = () => {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
-    alert('Thank you for your message! We\'ll get back to you soon.')
+    setIsSubmitting(true)
+
+    try {
+      // Send email using SMTP backend
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/send-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        // Show success notification
+        setNotification({
+          show: true,
+          message: 'Thank you for your message! We\'ll get back to you soon.',
+          type: 'success'
+        })
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          message: ''
+        })
+      } else {
+        throw new Error(result.message || 'Failed to send email')
+      }
+    } catch (error) {
+      console.error('Error sending email:', error)
+      setNotification({
+        show: true,
+        message: 'Sorry, there was an error sending your message. Please try again or contact us directly.',
+        type: 'error'
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleNotificationClose = () => {
+    setNotification({
+      show: false,
+      message: '',
+      type: 'success'
+    })
   }
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50">
+    <>
+      <Notification
+        message={notification.message}
+        type={notification.type}
+        isVisible={notification.show}
+        onClose={handleNotificationClose}
+      />
+      <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -115,9 +177,21 @@ const Contact = () => {
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-4 px-8 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                  disabled={isSubmitting}
+                  className={`w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 transform shadow-lg hover:shadow-xl ${
+                    isSubmitting 
+                      ? 'opacity-50 cursor-not-allowed' 
+                      : 'hover:from-blue-700 hover:to-indigo-700 hover:scale-105'
+                  }`}
                 >
-                  Send Message
+                  {isSubmitting ? (
+                    <div className="flex items-center justify-center">
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                      Sending...
+                    </div>
+                  ) : (
+                    'Send Message'
+                  )}
                 </button>
               </form>
             </div>
@@ -136,7 +210,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-gray-900">Email Us</h4>
-                    <p className="text-gray-600">hello@devfirm.com</p>
+                    <p className="text-gray-600">dkwebworks2808@gmail.com</p>
                   </div>
                 </div>
               </div>
@@ -150,7 +224,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-gray-900">Call Us</h4>
-                    <p className="text-gray-600">+1 (555) 123-4567</p>
+                    <p className="text-gray-600">+91 78891 37964</p>
                   </div>
                 </div>
               </div>
@@ -165,7 +239,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-gray-900">Visit Us</h4>
-                    <p className="text-gray-600">123 Tech Street, Digital City, DC 12345</p>
+                    <p className="text-gray-600">Mohali, 160055</p>
                   </div>
                 </div>
               </div>
@@ -199,6 +273,7 @@ const Contact = () => {
         </div>
       </div>
     </section>
+    </>
   )
 }
 
