@@ -3,6 +3,7 @@ services:
     name: krishna-webworks-backend
     env: node
     plan: free
+    rootDir: backend
     buildCommand: npm install
     startCommand: npm start
     envVars:
@@ -18,4 +19,3 @@ services:
         value: your-app-password
       - key: MAIL_FROM_NAME
         value: Krishna WebWorks
-
